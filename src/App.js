@@ -1,8 +1,12 @@
 import "./App.css";
 import { Navbar, Nav, Container, Row, Col } from "react-bootstrap";
 import 이미지이름 from "./bg.png";
+import { useState } from "react";
+import data from "./data";
 
 function App() {
+  const [shoes] = useState(data);
+
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark">
@@ -31,8 +35,8 @@ function App() {
               src="https://codingapple1.github.io/shop/shoes1.jpg"
               width={"80%"}
             ></img>
-            <h4>상품명</h4>
-            <p>상품설명</p>
+            <h4>{shoes[0].title}</h4>
+            <p>{shoes[0].price}</p>
           </Col>
           <Col sm>
             <img
@@ -40,8 +44,8 @@ function App() {
               src="https://codingapple1.github.io/shop/shoes2.jpg"
               width={"80%"}
             ></img>
-            <h4>상품명</h4>
-            <p>상품설명</p>
+            <h4>{shoes[1].title}</h4>
+            <p>{shoes[1].price}</p>
           </Col>
           <Col sm>
             <img
@@ -49,8 +53,8 @@ function App() {
               src="https://codingapple1.github.io/shop/shoes3.jpg"
               width={"80%"}
             ></img>
-            <h4>상품명</h4>
-            <p>상품설명</p>
+            <h4>{shoes[2].title}</h4>
+            <p>{shoes[2].price}</p>
           </Col>
         </Row>
       </Container>
