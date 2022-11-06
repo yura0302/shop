@@ -49,7 +49,7 @@ function App() {
               src="https://codingapple1.github.io/shop/shoes3.jpg"
               width={"80%"}
             ></img>
-            <h4>상품명22222222</h4>
+            <h4>상품명</h4>
             <p>상품설명</p>
           </Col>
         </Row>
