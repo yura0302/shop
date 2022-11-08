@@ -3,17 +3,18 @@ import { Navbar, Nav, Container, Row, Col } from "react-bootstrap";
 import 이미지이름 from "./bg.png";
 import { useState } from "react";
 import data from "./data";
+import Detail from "./pages/Detail";
+import { Route, Routes, Link, useNavigate, Outlet } from "react-router-dom";
 
 function App() {
   const [shoes] = useState(data);
-
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">홈</Nav.Link>
+            <Nav.Link href="#home9">홈</Nav.Link>
             <Nav.Link href="#features">전체상품</Nav.Link>
             <Nav.Link href="#question">묻고 답하기</Nav.Link>
             <Nav.Link href="#news">공지사항</Nav.Link>
@@ -22,18 +23,30 @@ function App() {
         </Container>
       </Navbar>
 
-      <div
-        className="main-bg"
-        style={{ backgroundImage: "url(" + 이미지이름 + ")" }}
-      ></div>
+      <Link to="/">홈</Link>
+      <Link to="/detail">상세페이지</Link>
 
-      <Container>
-        <Row>
-          {shoes.map((a, i) => {
-            return <Card shoes={shoes[i]} i={i}></Card>;
-          })}
-        </Row>
-      </Container>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <div
+                className="main-bg"
+                style={{ backgroundImage: "url(" + 이미지이름 + ")" }}
+              ></div>
+              <Container>
+                <Row>
+                  {shoes.map((item, i) => {
+                    return <Card key={item.id} shoes={shoes[i]} i={i}></Card>;
+                  })}
+                </Row>
+              </Container>
+            </div>
+          }
+        ></Route>
+        <Route path="/detail" element={<Detail shoes={shoes} />}></Route>
+      </Routes>
     </div>
   );
 }
