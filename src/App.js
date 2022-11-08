@@ -29,36 +29,30 @@ function App() {
 
       <Container>
         <Row>
-          <Col sm>
-            <img
-              alt="#"
-              src="https://codingapple1.github.io/shop/shoes1.jpg"
-              width={"80%"}
-            ></img>
-            <h4>{shoes[0].title}</h4>
-            <p>{shoes[0].price}</p>
-          </Col>
-          <Col sm>
-            <img
-              alt="#"
-              src="https://codingapple1.github.io/shop/shoes2.jpg"
-              width={"80%"}
-            ></img>
-            <h4>{shoes[1].title}</h4>
-            <p>{shoes[1].price}</p>
-          </Col>
-          <Col sm>
-            <img
-              alt="#"
-              src="https://codingapple1.github.io/shop/shoes3.jpg"
-              width={"80%"}
-            ></img>
-            <h4>{shoes[2].title}</h4>
-            <p>{shoes[2].price}</p>
-          </Col>
+          {shoes.map((a, i) => {
+            return <Card shoes={shoes[i]} i={i}></Card>;
+          })}
         </Row>
       </Container>
     </div>
+  );
+}
+
+function Card(props) {
+  return (
+    <>
+      <Col sm>
+        <img
+          alt="#"
+          src={
+            "https://codingapple1.github.io/shop/shoes" + (props.i + 1) + ".jpg"
+          }
+          width={"80%"}
+        ></img>
+        <h4>{props.shoes.title}</h4>
+        <p>{props.shoes.price}</p>
+      </Col>
+    </>
   );
 }
 
