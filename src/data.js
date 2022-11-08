@@ -3,22 +3,21 @@ const data = [
     id: 0,
     title: "White and Black",
     content: "Born in France",
-    price: 123123,
+    price: 120000,
   },
 
   {
     id: 1,
     title: "Red Knit",
     content: "Born in Seoul",
-    price: 45646,
+    price: 110000,
   },
 
   {
     id: 2,
     title: "Grey Yordan",
     content: "Born in the States",
-    price: 77657,
+    price: 130000,
   },
 ];
-
 export default data;

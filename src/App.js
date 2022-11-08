@@ -4,6 +4,8 @@ import 이미지이름 from "./bg.png";
 import { useState } from "react";
 import data from "./data";
 import Detail from "./pages/Detail";
+import Error from "./Error";
+import Event from "./pages/Event";
 import {
   Route,
   Routes,
@@ -12,7 +14,6 @@ import {
   Outlet,
   Navigate,
 } from "react-router-dom";
-import Error from "./Error";
 
 function App() {
   const [shoes] = useState(data);
@@ -64,10 +65,13 @@ function App() {
           }
         ></Route>
         <Route path="/detail" element={<Detail shoes={shoes} />}>
-          <Route path="shoes" element={<div>하이</div>}>
-            <Route path="pants" element={<div>펜츠하이</div>} />
-          </Route>
-          <Route path="shirt" element={<div>셔츠하이</div>}></Route>
+          <Route path="shoes" element={<div>하이</div>} />
+          <Route path="pants" element={<div>팬츠하이</div>} />
+          <Route path="shirt" element={<div>셔츠하이</div>} />
+        </Route>
+        <Route path="/event" element={<Event></Event>}>
+          <Route path="one" element={<div>첫 주문시 신발 모두 무료 </div>} />
+          <Route path="two" element={<div>생일기념 쿠폰 받기</div>} />
         </Route>
         <Route path="/*" element={<Error />}></Route>
       </Routes>
