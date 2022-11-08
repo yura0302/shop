@@ -4,27 +4,45 @@ import 이미지이름 from "./bg.png";
 import { useState } from "react";
 import data from "./data";
 import Detail from "./pages/Detail";
-import { Route, Routes, Link, useNavigate, Outlet } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  Link,
+  useNavigate,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
+import Error from "./Error";
 
 function App() {
   const [shoes] = useState(data);
+  const navigate = useNavigate();
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home9">홈</Nav.Link>
-            <Nav.Link href="#features">전체상품</Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Home
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate("/Detail");
+              }}
+            >
+              Detail
+            </Nav.Link>
             <Nav.Link href="#question">묻고 답하기</Nav.Link>
             <Nav.Link href="#news">공지사항</Nav.Link>
             <Nav.Link href="#info">판매자 정보</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
-
-      <Link to="/">홈</Link>
-      <Link to="/detail">상세페이지</Link>
 
       <Routes>
         <Route
@@ -45,7 +63,13 @@ function App() {
             </div>
           }
         ></Route>
-        <Route path="/detail" element={<Detail shoes={shoes} />}></Route>
+        <Route path="/detail" element={<Detail shoes={shoes} />}>
+          <Route path="shoes" element={<div>하이</div>}>
+            <Route path="pants" element={<div>펜츠하이</div>} />
+          </Route>
+          <Route path="shirt" element={<div>셔츠하이</div>}></Route>
+        </Route>
+        <Route path="/*" element={<Error />}></Route>
       </Routes>
     </div>
   );
