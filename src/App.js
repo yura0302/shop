@@ -64,7 +64,7 @@ function App() {
             </div>
           }
         ></Route>
-        <Route path="/detail" element={<Detail shoes={shoes} />}>
+        <Route path="/detail/:id" element={<Detail shoes={shoes} />}>
           <Route path="shoes" element={<div>하이</div>} />
           <Route path="pants" element={<div>팬츠하이</div>} />
           <Route path="shirt" element={<div>셔츠하이</div>} />
