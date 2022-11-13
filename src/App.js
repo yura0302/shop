@@ -15,9 +15,10 @@ import {
   Navigate,
 } from "react-router-dom";
 import axios from "axios";
+import _ from "lodash";
 
 function App() {
-  const [shoes] = useState(data);
+  const [shoes, setShoes] = useState(data);
   const navigate = useNavigate();
   return (
     <div className="App">
@@ -50,33 +51,34 @@ function App() {
         <Route
           path="/"
           element={
-            <div>
+            <>
               <div
                 className="main-bg"
                 style={{ backgroundImage: "url(" + 이미지이름 + ")" }}
               ></div>
-              <Container>
-                <Row>
+              <div className="container">
+                <div className="row">
                   {shoes.map((item, i) => {
                     return <Card key={item.id} shoes={shoes[i]} i={i}></Card>;
                   })}
-                </Row>
-                <button
-                  onClick={() => {
-                    axios
-                      .get("https://codingapple1.github.io/shop/data2.json")
-                      .then((result) => {
-                        console.log(result.data);
-                      })
-                      .catch(() => {
-                        console.log("히히 못줘");
-                      });
-                  }}
-                >
-                  버튼
-                </button>
-              </Container>
-            </div>
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  axios
+                    .get("https://codingapple1.github.io/shop/data2.json")
+                    .then((result) => {
+                      const copy = _.union(shoes, result.data);
+                      setShoes(copy);
+                    })
+                    .catch(() => {
+                      console.log("히히 못줘");
+                    });
+                }}
+              >
+                더보기
+              </button>
+            </>
           }
         ></Route>
         <Route path="/detail/:id" element={<Detail shoes={shoes} />}>
@@ -97,7 +99,7 @@ function App() {
 function Card(props) {
   return (
     <>
-      <Col sm>
+      <div className="col-md-4">
         <img
           alt="#"
           src={
@@ -107,7 +109,7 @@ function Card(props) {
         ></img>
         <h4>{props.shoes.title}</h4>
         <p>{props.shoes.price}</p>
-      </Col>
+      </div>
     </>
   );
 }
