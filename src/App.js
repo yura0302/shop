@@ -14,6 +14,7 @@ import {
   Outlet,
   Navigate,
 } from "react-router-dom";
+import axios from "axios";
 
 function App() {
   const [shoes] = useState(data);
@@ -60,6 +61,20 @@ function App() {
                     return <Card key={item.id} shoes={shoes[i]} i={i}></Card>;
                   })}
                 </Row>
+                <button
+                  onClick={() => {
+                    axios
+                      .get("https://codingapple1.github.io/shop/data2.json")
+                      .then((result) => {
+                        console.log(result.data);
+                      })
+                      .catch(() => {
+                        console.log("히히 못줘");
+                      });
+                  }}
+                >
+                  버튼
+                </button>
               </Container>
             </div>
           }

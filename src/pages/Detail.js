@@ -1,17 +1,36 @@
+import { cleanup } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 
 function Detail(props) {
-  const [alert, setAlert] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setAlert(false);
-    }, 1000);
-  }, []);
-
+  const [alarm, setAlarm] = useState(true);
+  const [input, setInput] = useState("");
   const { id } = useParams();
   const product = props.shoes.find((i) => i.id == id);
-  console.log(product);
+
+  useEffect(() => {
+    const a = setTimeout(() => {
+      setAlarm(false);
+    }, 1000);
+    return () => {
+      cleanup(a);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isNaN(input) == true) {
+      alert("이러지마시오");
+    }
+  }, [input]);
+  return (
+    <input
+      onChange={(e) => {
+        // eslint-disable-next-line no-unused-expressions
+        e.target.value;
+      }}
+    ></input>
+  );
+
   return (
     <div className="container">
       {alert === true ? (
@@ -21,12 +40,13 @@ function Detail(props) {
         <div className="col-md-6">
           <img
             alt="#"
-            src={`https://codingapple1.github.io/shop/shoes${id * 0 + 1}.jpg`}
+            src={`https://codingapple1.github.io/shop/shoes${+id + 1}.jpg`}
             // 나누기는 숫자형으로 자동변환되서 계산됨 ==자동형변환
             width="100%"
           />
         </div>
         <div className="col-md-6 mt-4">
+          <input placeholder="수량 입력란" type="number"></input>
           <h4 className="pt-5">{product?.title}</h4>
           <p>{product?.content}</p>
           <p>{product?.price}원</p>
@@ -37,4 +57,5 @@ function Detail(props) {
     </div>
   );
 }
+
 export default Detail;
