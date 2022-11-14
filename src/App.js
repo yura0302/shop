@@ -1,5 +1,5 @@
 import "./App.css";
-import { Navbar, Nav, Container, Row, Col } from "react-bootstrap";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import 이미지이름 from "./bg.png";
 import { useState } from "react";
 import data from "./data";
@@ -15,11 +15,14 @@ import {
   Navigate,
 } from "react-router-dom";
 import axios from "axios";
-import _ from "lodash";
+import _, { set } from "lodash";
+import Skeleton from "./Skeleton";
 
 function App() {
   const [shoes, setShoes] = useState(data);
   const navigate = useNavigate();
+  const [button, setButton] = useState(1);
+  const [load, setLoad] = useState(false);
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark">
@@ -63,17 +66,26 @@ function App() {
                   })}
                 </div>
               </div>
+              {load ? <Skeleton /> : ""}
+
               <button
                 onClick={() => {
+                  setLoad(true);
                   axios
                     .get("https://codingapple1.github.io/shop/data2.json")
                     .then((result) => {
                       const copy = _.union(shoes, result.data);
                       setShoes(copy);
+                      setButton(button + 1);
+                      console.log(button);
                     })
                     .catch(() => {
                       console.log("히히 못줘");
+                    })
+                    .finally(() => {
+                      setLoad(false);
                     });
+                  
                 }}
               >
                 더보기

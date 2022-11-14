@@ -6,7 +6,7 @@ function Detail(props) {
   const [alarm, setAlarm] = useState(true);
   const [input, setInput] = useState("");
   const { id } = useParams();
-  const product = props.shoes.find((i) => i.id == id);
+  const product = props.shoes.find((i) => i.id === id);
 
   useEffect(() => {
     const a = setTimeout(() => {
@@ -18,18 +18,17 @@ function Detail(props) {
   }, []);
 
   useEffect(() => {
-    if (isNaN(input) == true) {
+    if (isNaN(input) === true) {
       alert("이러지마시오");
     }
+    return (
+      <input
+        onChange={(e) => {
+          setInput(e.target.value);
+        }}
+      />
+    );
   }, [input]);
-  return (
-    <input
-      onChange={(e) => {
-        // eslint-disable-next-line no-unused-expressions
-        e.target.value;
-      }}
-    ></input>
-  );
 
   return (
     <div className="container">
@@ -57,5 +56,4 @@ function Detail(props) {
     </div>
   );
 }
-
 export default Detail;
