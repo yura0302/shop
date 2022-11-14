@@ -16,7 +16,7 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import _, { set } from "lodash";
-import Skeleton from "./Skeleton";
+import Spinner from "react-spinners";
 
 function App() {
   const [shoes, setShoes] = useState(data);
@@ -66,26 +66,41 @@ function App() {
                   })}
                 </div>
               </div>
-              {load ? <Skeleton /> : ""}
+              {load ? <FadeLoader /> : ""}
 
               <button
                 onClick={() => {
                   setLoad(true);
-                  axios
-                    .get("https://codingapple1.github.io/shop/data2.json")
-                    .then((result) => {
-                      const copy = _.union(shoes, result.data);
-                      setShoes(copy);
-                      setButton(button + 1);
-                      console.log(button);
-                    })
-                    .catch(() => {
-                      console.log("히히 못줘");
-                    })
-                    .finally(() => {
-                      setLoad(false);
-                    });
-                  
+                  setButton(button + 1);
+                  if (button === 1) {
+                    axios
+                      .get("https://codingapple1.github.io/shop/data2.json")
+                      .then((result) => {
+                        const copy = _.union(shoes, result.data);
+                        setShoes(copy);
+                      })
+                      .catch(() => {
+                        console.log("히히 못줘");
+                      })
+                      .finally(() => {
+                        setLoad(false);
+                      });
+                  } else if (button === 2) {
+                    axios
+                      .get("https://codingapple1.github.io/shop/data3.json")
+                      .then((result) => {
+                        const copy = _.union(shoes, result.data);
+                        setShoes(copy);
+                      })
+                      .catch(() => {
+                        console.log("히히 못줘");
+                      })
+                      .finally(() => {
+                        setLoad(false);
+                      });
+                  } else if (button >= 3) {
+                    alert("이게 끝임");
+                  }
                 }}
               >
                 더보기
