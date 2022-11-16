@@ -6,28 +6,21 @@ import data from "./data";
 import Detail from "./pages/Detail";
 import Error from "./Error";
 import Event from "./pages/Event";
-import {
-  Route,
-  Routes,
-  Link,
-  useNavigate,
-  Outlet,
-  Navigate,
-} from "react-router-dom";
+import { Route, Routes, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import _, { set } from "lodash";
-import Spinner from "react-spinners";
+import _ from "lodash";
 
 function App() {
   const [shoes, setShoes] = useState(data);
   const navigate = useNavigate();
   const [button, setButton] = useState(1);
   const [load, setLoad] = useState(false);
+
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
+          <Navbar.Brand href="#">ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link
               onClick={() => {
@@ -62,11 +55,11 @@ function App() {
               <div className="container">
                 <div className="row">
                   {shoes.map((item, i) => {
-                    return <Card key={item.id} shoes={shoes[i]} i={i}></Card>;
+                    return <Card key={item.id} shoes={shoes[i]}></Card>;
                   })}
                 </div>
               </div>
-              {load ? <FadeLoader /> : ""}
+              {load ? "" : ""}
 
               <button
                 onClick={() => {
@@ -123,19 +116,26 @@ function App() {
   );
 }
 
-function Card(props) {
+function Card({ shoes }) {
   return (
     <>
       <div className="col-md-4">
         <img
           alt="#"
           src={
-            "https://codingapple1.github.io/shop/shoes" + (props.i + 1) + ".jpg"
+            "https://codingapple1.github.io/shop/shoes" +
+            (shoes.id + 1) +
+            ".jpg"
           }
           width={"80%"}
         ></img>
-        <h4>{props.shoes.title}</h4>
-        <p>{props.shoes.price}</p>
+        <h4>{shoes.title}</h4>
+        <p>{shoes.price}</p>
+        <Link to={`/detail/${shoes.id}`}>
+          <button type="button" className="btn btn-primary">
+            더보기
+          </button>
+        </Link>
       </div>
     </>
   );
