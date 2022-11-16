@@ -59,7 +59,6 @@ function App() {
                   })}
                 </div>
               </div>
-              {load ? "" : ""}
 
               <button
                 onClick={() => {
