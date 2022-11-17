@@ -1,7 +1,7 @@
 import { cleanup } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
-import { Container, Nav } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 
 function Detail(props) {
   const [alarm, setAlarm] = useState(true);
@@ -88,14 +88,14 @@ function Detail(props) {
               </Nav.Link>
             </Nav.Item>
           </Nav>
-          <TapContent tap={tap} />
+          <TapContent tap={tap} shoes={props.shoes} />
         </div>
       }
     </div>
   );
 }
 
-const TapContent = ({ tap }) => {
+const TapContent = ({ tap, shoes }) => {
   const [fade, setFade] = useState("");
 
   useEffect(() => {
@@ -109,7 +109,13 @@ const TapContent = ({ tap }) => {
 
   return (
     <div className={"start " + fade}>
-      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tap]}
+      {
+        [
+          <div>{shoes[0].title}</div>,
+          <div>{shoes[1].title}</div>,
+          <div>{shoes[2].title}</div>,
+        ][tap]
+      }
     </div>
   );
 };

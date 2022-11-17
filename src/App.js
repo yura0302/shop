@@ -9,6 +9,7 @@ import Event from "./pages/Event";
 import { Route, Routes, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import _ from "lodash";
+import Cart from "./pages/Cart";
 
 function App() {
   const [shoes, setShoes] = useState(data);
@@ -105,6 +106,7 @@ function App() {
           <Route path="pants" element={<div>팬츠하이</div>} />
           <Route path="shirt" element={<div>셔츠하이</div>} />
         </Route>
+        <Route path="/cart" element={<Cart />}></Route>
         <Route path="/event" element={<Event></Event>}>
           <Route path="one" element={<div>첫 주문시 신발 모두 무료 </div>} />
           <Route path="two" element={<div>생일기념 쿠폰 받기</div>} />
