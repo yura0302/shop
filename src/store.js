@@ -1,12 +1,18 @@
 // redux 담는통
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-const user = createSlice({
+let user = createSlice({
   name: "user",
   initialState: "kim",
+  reducers: {
+    changeName(state) {
+      return "john" + state;
+    },
+  },
 });
+export let { changeName } = user.actions;
 
-const cart = createSlice({
+let cart = createSlice({
   name: "cart",
   initialState: [
     { id: 0, name: "White and Black", count: 2 },
@@ -17,5 +23,6 @@ const cart = createSlice({
 export default configureStore({
   reducer: {
     cart: cart.reducer,
+    user: user.reducer,
   },
 });
