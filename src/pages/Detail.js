@@ -50,7 +50,7 @@ function Detail(props) {
               {/* <input placeholder="수량 입력란" type="number"></input> */}
               <h4 className="pt-5">{product?.title}</h4>
               <p>{product?.content}</p>
-              <p>{product.price}원</p>
+              <p>{product?.price}원</p>
               <button className="btn btn-danger">주문하기</button>
             </div>
           </div>
