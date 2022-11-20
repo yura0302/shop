@@ -21,10 +21,12 @@ let cart = createSlice({
       });
       state[number].count--;
     },
+    addItem(state, action) {
+      state.push(action.payload);
+    },
   },
 });
-export const { addCount } = cart.actions;
-export const { reduceCount } = cart.actions;
+export let { addCount, reduceCount, addItem } = cart.actions;
 
 export default configureStore({
   reducer: {

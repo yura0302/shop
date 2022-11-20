@@ -1,7 +1,9 @@
 import { cleanup } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
+import { addItem } from "../store";
+import { useDispatch } from "react-redux";
 
 function Detail(props) {
   const [alarm, setAlarm] = useState(true);
@@ -11,6 +13,12 @@ function Detail(props) {
   let product = props.shoes.find(function (x) {
     return x.id == id;
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const goToCart = () => {
+    navigate("/cart");
+  };
 
   useEffect(() => {
     const a = setTimeout(() => {
@@ -51,7 +59,15 @@ function Detail(props) {
               <h4 className="pt-5">{product?.title}</h4>
               <p>{product?.content}</p>
               <p>{product?.price}원</p>
-              <button className="btn btn-danger">주문하기</button>
+              <button
+                className="btn btn-danger"
+                onClick={() => {
+                  goToCart();
+                  dispatch(addItem({ id: 1, name: "Red Knit", count: 1 }));
+                }}
+              >
+                주문하기
+              </button>
             </div>
           </div>
           <Outlet />
